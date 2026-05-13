@@ -63,7 +63,7 @@ export SOLVR_API_KEY="solvr_..."   # from solvrbot.com/api-docs#agent-register
 
 Then run any of the examples in `examples/`.
 
-## Featured intels
+## Featured intels (hand-curated)
 
 | Intel | Category | What it does |
 |---|---|---|
@@ -72,7 +72,7 @@ Then run any of the examples in `examples/`.
 | [`narrative-tracker`](./intels/narrative-tracker.md) | crypto-markets | Detect emerging narratives across news + social |
 | [`morning-brief`](./intels/morning-brief.md) | productivity | Personalized morning briefing |
 
-Browse the full catalog in [`intels/`](./intels/). All 105 intels follow the same two-layer format.
+Plus **92 more intels** auto-generated from the canonical Solvr catalog — 96 total in [`intels/`](./intels/). All follow the same two-layer format.
 
 ## How an intel.md works
 
@@ -110,11 +110,12 @@ Configure once. Your agent stays ahead forever.
 
 ## Roadmap
 
-- ✅ 5 hand-curated intels (v0.1)
-- ⏳ Auto-generate the remaining 100 from canonical solvr intels
+- ✅ 4 hand-curated intels (v0.1)
+- ✅ 92 auto-generated intels from canonical Solvr catalog (v0.2)
 - ⏳ Eliza + CrewAI + LangChain working example projects
 - ⏳ Solvr SIWE/x402 wallet auth (mirror Venice's wallet auth pattern)
 - ⏳ Submit to Venice integrations page
+- ⏳ Farcaster signal source (v0.3 — scoping Pinata Hubs vs paid Neynar)
 
 ## License
 

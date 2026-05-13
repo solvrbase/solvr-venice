@@ -54,7 +54,6 @@ def narrative_tracker() -> str:
     """Detect emerging crypto narratives. No Solvr API key required."""
     news = requests.get(f"{SOLVR}/api/v1/news", params={"limit": 20}).json()
     trending = requests.get(f"{SOLVR}/api/v1/dex/trending").json()
-    casts = requests.get(f"{SOLVR}/api/v1/farcaster", params={"limit": 20}).json()
 
     return _synthesize(
         system=(
@@ -62,7 +61,7 @@ def narrative_tracker() -> str:
             "threads. Rank by emergence strength: how fresh (last 24h weighted higher) "
             "and how cross-source. Output top 5 with freshness score 0-100."
         ),
-        user=f"news: {news}\n\ntrending: {trending}\n\ncasts: {casts}",
+        user=f"news: {news}\n\ntrending: {trending}",
     )
 
 

@@ -21,19 +21,20 @@ Detect what's actually being talked about in crypto right now, before it's an ob
 
 | Layer | Provider | What it does |
 |---|---|---|
-| Data | Solvr (free tier, keyless) | `/news` + `/dex/trending` + `/farcaster` — raw narrative signal |
+| Data | Solvr (free tier, keyless) | `/news` + `/dex/trending` — raw narrative signal |
 | Inference | Venice | `/chat/completions` with `zai-org-glm-5-1` — narrative extraction + ranking |
 
 ## Endpoints
 
 - `GET https://api.solvrbot.com/api/v1/news?limit=20` — news headlines across categories (keyless)
 - `GET https://api.solvrbot.com/api/v1/dex/trending` — trending tokens on Base (keyless)
-- `GET https://api.solvrbot.com/api/v1/farcaster?limit=20` — trending Farcaster casts (keyless)
 - `POST https://api.venice.ai/api/v1/chat/completions` — narrative extraction (Venice)
+
+> Note: Farcaster cast signal is on the v0.2 roadmap. Free providers like Neynar gate trending feeds behind paid tiers; we're scoping alternatives.
 
 ## Workflow
 
-1. Fetch news, trending tokens, and Farcaster casts from Solvr (all keyless — no API key needed).
+1. Fetch news and trending tokens from Solvr (both keyless — no API key needed).
 2. Pass the combined corpus to Venice with narrative-detection instructions.
 3. Venice clusters mentions, extracts narrative threads, and ranks by emergence strength (how fresh + how cross-source).
 4. Output: top 5 narratives with one-line description, supporting tickers/projects, and a freshness score (0-100).
@@ -72,7 +73,6 @@ venice = OpenAI(
 def narrative_tracker() -> str:
     news     = requests.get(f"{SOLVR}/api/v1/news", params={"limit": 20}).json()
     trending = requests.get(f"{SOLVR}/api/v1/dex/trending").json()
-    casts    = requests.get(f"{SOLVR}/api/v1/farcaster", params={"limit": 20}).json()
 
     r = venice.chat.completions.create(
         model="zai-org-glm-5-1",
@@ -80,11 +80,11 @@ def narrative_tracker() -> str:
             {"role": "system", "content": (
                 "You are a crypto narrative analyst. Cluster the inputs into narrative threads. "
                 "Rank by emergence strength: how fresh (last 24h weighted higher) and how "
-                "cross-source (mentions in news + Farcaster + trending tokens weighted higher than "
+                "cross-source (mentions in news + trending tokens weighted higher than "
                 "single-source). Output top 5 with freshness score 0-100."
             )},
             {"role": "user", "content": (
-                f"news: {news}\n\ntrending tokens: {trending}\n\nfarcaster casts: {casts}"
+                f"news: {news}\n\ntrending tokens: {trending}"
             )},
         ],
         extra_body={"venice_parameters": {"enable_web_search": "auto"}},

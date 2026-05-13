@@ -51,17 +51,14 @@ Two permissionless layers. Two parallel economic models. One agent.
 ```bash
 git clone https://github.com/solvrbase/solvr-venice
 cd solvr-venice
+pip install -r requirements.txt
+cp .env.example .env       # then fill in VENICE_API_KEY
+python examples/quickstart.py
 ```
 
-Pick any intel from `intels/`, drop it into your agent's intel/skill directory, and configure your agent with two env vars:
+That runs 3 intels end-to-end: two keyless (no Solvr key needed) and one tier-gated (skips cleanly if no Solvr key is set). Expect output in ~10 seconds.
 
-```bash
-export VENICE_API_KEY="vk-..."     # from venice.ai/settings/api
-export SOLVR_API_KEY="solvr_..."   # from solvrbot.com/api-docs#agent-register
-                                    # OR omit for free-tier-only intels (keyless)
-```
-
-Then run any of the examples in `examples/`.
+To use any individual intel in your own agent, drop the `.md` file into your agent's intel/skill directory and call Venice's OpenAI-compatible endpoint per the workflow inside.
 
 ## Featured intels (hand-curated)
 
@@ -107,6 +104,13 @@ That last one matters for crypto agents specifically. An intel that scans a toke
 Solvr is the intelligence layer of the agent economy. 105 specialized intel modules across crypto, onchain, news, dev, social, productivity, and markets. The free tier is keyless. Standard and Full tiers unlock by holding $SOLVR on Base — no human approves you, no whitelist, code is the only gatekeeper.
 
 Configure once. Your agent stays ahead forever.
+
+## Common gotchas
+
+- **Venice needs credits.** A fresh Venice API key authenticates but won't fulfill API calls until you add credits at [venice.ai/settings/api](https://venice.ai/settings/api). $5 USD covers ~1000 test runs. The quickstart returns `"Insufficient USD or Diem balance"` until then.
+- **Solvr free-tier intels are keyless.** `narrative-tracker`, `morning-brief`, and other free-tier intels work without `SOLVR_API_KEY`. Only standard or full tier intels (e.g. `token-report`) require a key.
+- **Tier upgrade is onchain.** Standard tier unlocks when your wallet holds 20M $SOLVR on Base. Full tier: 1B $SOLVR. Checked every 10 minutes via `eth_call balanceOf`. No manual approval anywhere.
+- **API key spend caps recommended.** When generating your Venice key, set the **Inference** permission scope (not Admin) and toggle a $5/month USD spend cap. Protects against runaway loops.
 
 ## Roadmap
 

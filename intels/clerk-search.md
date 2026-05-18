@@ -1,11 +1,11 @@
 ---
 name: clerk-search
-description: US federal court records via Clerk (clerk.solvrlabs.ai). Litigation discovery + legal risk analysis composable with Solvr intel.
+description: "US federal court records via Clerk (clerk.solvrlabs.ai). Litigation discovery and legal risk analysis composable with Solvr intel."
 category: research-content
 tier: standard
-solvr_api: https://api.solvrbot.com
-auth: Authorization: Bearer {SOLVR_API_KEY}
-source: https://github.com/solvrbase/solvr
+solvr_api: "https://api.solvrbot.com"
+auth: "Authorization: Bearer {SOLVR_API_KEY}"
+source: "https://github.com/solvrbase/solvr"
 ---
 
 # Clerk Search
@@ -23,13 +23,13 @@ per query via x402 micropayments on Base ($0.02 USDC/query). 1B+
 $CLERK token holders on Base get free unlimited access.
 
 - `GET /search?q={query}&limit={n}&court={code}&date_filed_after={YYYY-MM-DD}`
-  — case search (CourtListener primary, PACER fallback for sealed)
+  — federal case search across cases, dockets, opinions
 - `GET /parties?name={name}&limit={n}` — entity-by-name lookup
-- `GET /judges?name={name}` — judicial profile + opinions written
-- `GET /citations?q={query}&court={code}` — opinions / precedents
+- `GET /judges?name={name}` — judicial profile and opinions written
+- `GET /citations?q={query}&court={code}` — opinions and precedents
 - `GET /docket/{docket_id}` — full docket detail
 - `GET /opinion/{opinion_id}` — full opinion text
-- `GET /filings/{docket_id}` — docket entries / timeline
+- `GET /filings/{docket_id}` — docket entries and timeline
 
 ## Workflow
 
@@ -88,18 +88,16 @@ Markdown legal-risk report:
 ## Limits
 
 - **Federal only** — state courts (NY State Supreme, CA Superior, etc.)
-  are NOT in CourtListener. State AG actions are NOT covered.
-- **PACER lag** — paid PACER fallback has hours-to-days lag on filings
-- **Sealed cases** — sealed dockets won't appear
+  are NOT covered. State AG actions are out of scope.
+- **Filing freshness** — newly filed dockets may take hours to surface
+- **Sealed cases** — sealed dockets are not exposed
 - **No legal advice** — surfaces public records; interpretation
   requires a licensed attorney
-- **Crypto enforcement** — SEC / CFTC actions (federal) are covered;
-  CFPB consent orders + state AGs are NOT
+- **Crypto enforcement** — SEC and CFTC actions (federal) are covered;
+  CFPB consent orders and state AG actions are NOT
 
 ## Named references
 
 - Clerk product page: https://clerk.solvrlabs.ai
 - Clerk API docs: https://clerk.solvrlabs.ai/docs
-- CourtListener (primary data source): https://www.courtlistener.com/help/api/
-- PACER (paid fallback): https://pacer.uscourts.gov
 - x402 micropayments rail: https://x402.bankr.bot

@@ -1,6 +1,6 @@
 # solvr-venice
 
-**Drop-in intelligence pack for Venice-backed agents.** 105 specialized intel modules — crypto, onchain, news, dev, social, markets, productivity — that compose with Venice's inference layer in one line of config.
+**Drop-in intelligence pack for Venice-backed agents.** 106 specialized intel modules — crypto, onchain, news, dev, social, markets, productivity — that compose with Venice's inference layer in one line of config.
 
 ```
 solvr-venice
@@ -14,13 +14,13 @@ Venice = inference.  Solvr = intelligence.  Together = sovereign agent stack.
 
 Venice ships world-class inference and useful primitives: 244 models, OpenAI-compatible API, x402 payments, multi-chain RPC, web search, scraping, text parsing. What Venice doesn't ship is **curated intelligence** — the analyst-grade signal layer an agent reads from to decide what to do.
 
-Solvr does. 105 intel modules covering token security, onchain monitoring, news, dev signals, social feeds, prediction markets, narrative tracking. Every intel is a self-contained markdown file that any OpenAI-compatible agent can consume.
+Solvr does. 106 intel modules covering token security, onchain monitoring, news, dev signals, social feeds, prediction markets, narrative tracking. Every intel is a self-contained markdown file that any OpenAI-compatible agent can consume.
 
 This repo is the bridge: every Solvr intel, restructured to run natively on Venice.
 
 ## What you get
 
-- **105 prebuilt intels** as drop-in `.md` files
+- **106 prebuilt intels** as drop-in `.md` files
 - **Two-layer architecture**: data from Solvr, synthesis from Venice
 - **OpenAI-compatible** — works with any agent framework that wraps the OpenAI SDK (Eliza, CrewAI, LangChain, Coinbase Agentkit, Cursor, etc.)
 - **Permissionless** — free Solvr endpoints are keyless, Venice supports x402 wallet auth, no central gatekeeper between you and the data
@@ -69,7 +69,7 @@ To use any individual intel in your own agent, drop the `.md` file into your age
 | [`narrative-tracker`](./intels/narrative-tracker.md) | crypto-markets | Detect emerging narratives across news + social |
 | [`morning-brief`](./intels/morning-brief.md) | productivity | Personalized morning briefing |
 
-Plus **92 more intels** auto-generated from the canonical Solvr catalog — 96 total in [`intels/`](./intels/). All follow the same two-layer format.
+Plus **92 more intels** auto-generated from the canonical Solvr catalog — 97 total in [`intels/`](./intels/). All follow the same two-layer format.
 
 ## How an intel.md works
 
@@ -101,7 +101,7 @@ That last one matters for crypto agents specifically. An intel that scans a toke
 
 ## Why Solvr
 
-Solvr is the intelligence layer of the agent economy. 105 specialized intel modules across crypto, onchain, news, dev, social, productivity, and markets. The free tier is keyless. Standard and Full tiers unlock by holding $SOLVR on Base — no human approves you, no whitelist, code is the only gatekeeper.
+Solvr is the intelligence layer of the agent economy. 106 specialized intel modules across crypto, onchain, news, dev, social, productivity, and markets. The free tier is keyless. Standard and Full tiers unlock by holding $SOLVR on Base — no human approves you, no whitelist, code is the only gatekeeper.
 
 Configure once. Your agent stays ahead forever.
 
